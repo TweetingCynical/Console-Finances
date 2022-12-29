@@ -90,7 +90,7 @@ var finances = [
 
 // Declare variables
 let numberOfMonths = 0
-let total = 0;
+var total = 0;
 let change = 0;
 let net = 0
 let netArray = [];
@@ -100,6 +100,15 @@ let SmallestPL = ['',0];
 
 // Count the number of rows in the table
 var months = finances.length;
+
+// Calculate the total of all months
+for(let row = 0; row < finances.length; row++){
+  for(let col = 0; col < finances[row].length; col++){
+    if(typeof finances[row][col] !== 'string'){
+      total = total + finances[row][col]
+    }
+  }
+}
 
 // var Ttl = finances.reduce((sum, arr) => sum + arr[1], 0);
 // console.log(Ttl)
