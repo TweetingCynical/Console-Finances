@@ -1,3 +1,4 @@
+// Initial finances data
 var finances = [
 ['Jan-2010', 867884],
 ['Feb-2010', 984655],
@@ -87,27 +88,31 @@ var finances = [
 ['Feb-2017', 671099]
 ];
 
-//Make the inner array into a table
-console.table(finances);
-
-// Count the number of rows in the table, and subtract 1 for the header row
-var NumberOfMonths = finances.length;
-console.log(NumberOfMonths);
-
-var Total = finances.reduce((sum, arr) => sum + arr[1], 0);
-console.log(Total);
-
+// Declare variables
+let numberOfMonths = 0
+let total = 0;
+let change = 0;
+let net = 0
+let netArray = [];
 let AveragePL = 0;
-let GreatestPLMonth = 'Test';
-let GreatestPL = 0;
-let SmallestPLMonth = 'Test';
-let SmallestPL = 0;
+let GreatestPL = ['',9999999999999];
+let SmallestPL = ['',0];
+
+// Count the number of rows in the table
+var months = finances.length;
+
+// var Ttl = finances.reduce((sum, arr) => sum + arr[1], 0);
+// console.log(Ttl)
+// var Total = Ttl.toLocaleString(undefined, {
+//   minimumFractionDigits: 2,
+//   maximumFractionDigits: 2
+// })
 
 // Final console output
-console.log('Finance Analysis');
-console.log('----------------------------');
-console.log('Total Months: ' + NumberOfMonths);
-console.log('Total: $' + Total);
-console.log('Average  Change: $' + AveragePL);
-console.log('Greatest increase in Profits: ' + GreatestPLMonth + ' $' + GreatestPL);
-console.log('Greatest decrease in Profits: ' + SmallestPLMonth + ' $' + SmallestPL);
+console.log(`Finance Analysis
+----------------------------
+Total Months: ${months}
+Total: $${total}
+Average  Change: $${AveragePL}
+Greatest increase in Profits: ${GreatestPL[0]}: $${GreatestPL[1]}
+Greatest decrease in Profits: ${SmallestPL[0]}: $${SmallestPL[1]}`);
