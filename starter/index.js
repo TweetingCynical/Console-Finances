@@ -1,5 +1,5 @@
 // Initial finances data
-var finances = [
+let finances = [
 ['Jan-2010', 867884],
 ['Feb-2010', 984655],
 ['Mar-2010', 322013],
@@ -89,13 +89,10 @@ var finances = [
 ];
 
 // Declare variables
-var total = 0;
+let total = 0;
 let diff = 0;
 let net = 0
-let netArray = [];
 let AveragePL = 0;
-let GreatestPL = ['',9999999999999];
-let SmallestPL = ['',0];
 
 // Count the number of rows in the table
 var months = finances.length;
@@ -111,35 +108,30 @@ for(let row = 0; row < finances.length; row++){
       diff = finances[row][col] - net;
       // Reset value of net, to the value of the current monthly amount, ready to be used in the next loop.
       net = finances[row][col];
-      // Put values of change into a new array
-      netArray.push(diff);
-      // Calculate average difference
     }
   }
+  // After each monthly difference has been calculated, append it to each row within the finances table.
+  finances[row].push(diff);
 }
 
-// Loop to find the sum of monthly difference from newly created netArray of monthly differences
-AveragePL = netArray.reduce((sum,arr) => sum + arr, 0);
-// for (let index in netArray) {
-//   AveragePL = AveragePL + netArray[index];
-// }
+// Reduce to find the sum of monthly difference from newly created index 2 (monthly differences) of finances
+AveragePL = finances.reduce((sum,arr) => sum + arr[2], 0);
 // Use sum of monthly differences to calculate the average, and convert to 2 decimal places
 AveragePL = (AveragePL / months).toFixed(2);
 
-
-
-// var Ttl = finances.reduce((sum, arr) => sum + arr[1], 0);
-// console.log(Ttl)
-// var Total = Ttl.toLocaleString(undefined, {
-//   minimumFractionDigits: 2,
-//   maximumFractionDigits: 2
-// })
+// Sort the finances array by the largest of index 2
+finances = finances.sort(function(a,b) {
+  return b[2]-a[2]
+});
 
 // Final console output
-console.log(`Finance Analysis
+output = `
+Finance Analysis
 ----------------------------
 Total Months: ${months}
 Total: $${total}
 Average  Change: $${AveragePL}
-Greatest increase in Profits: ${GreatestPL[0]}: $${GreatestPL[1]}
-Greatest decrease in Profits: ${SmallestPL[0]}: $${SmallestPL[1]}`);
+Greatest increase in Profits: ${finances[0][0]} ($${finances[0][2]})
+Greatest decrease in Profits: ${finances[finances.length - 1][0]} ($${finances[finances.length - 1][2]})`;
+
+console.log(output)
