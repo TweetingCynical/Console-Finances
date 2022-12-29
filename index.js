@@ -98,12 +98,12 @@ let AveragePL = 0;
 var months = finances.length;
 
 // Calculate the total of all months, net difference each month, highest difference and lowest difference
-for(let row = 0; row < finances.length; row++){
-  for(let col = 0; col < finances[row].length; col++){
+for(let row in finances){
+  for(let col in finances[row]){
     // Ignore the month column, perform actions only on amount column
     if(typeof finances[row][col] !== 'string'){
       // Calculate running total from each row to the next
-      total = total + finances[row][col];
+      total += finances[row][col];
       // Calculate the difference between the current month and the last
       diff = finances[row][col] - net;
       // Reset value of net, to the value of the current monthly amount, ready to be used in the next loop.
