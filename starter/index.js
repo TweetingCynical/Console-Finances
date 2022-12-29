@@ -89,9 +89,8 @@ var finances = [
 ];
 
 // Declare variables
-let numberOfMonths = 0
 var total = 0;
-let change = 0;
+let diff = 0;
 let net = 0
 let netArray = [];
 let AveragePL = 0;
@@ -101,14 +100,33 @@ let SmallestPL = ['',0];
 // Count the number of rows in the table
 var months = finances.length;
 
-// Calculate the total of all months
+// Calculate the total of all months, net difference each month, highest difference and lowest difference
 for(let row = 0; row < finances.length; row++){
   for(let col = 0; col < finances[row].length; col++){
+    // Ignore the month column, perform actions only on amount column
     if(typeof finances[row][col] !== 'string'){
-      total = total + finances[row][col]
+      // Calculate running total from each row to the next
+      total = total + finances[row][col];
+      // Calculate the difference between the current month and the last
+      diff = finances[row][col] - net;
+      // Reset value of net, to the value of the current monthly amount, ready to be used in the next loop.
+      net = finances[row][col];
+      // Put values of change into a new array
+      netArray.push(diff);
+      // Calculate average difference
     }
   }
 }
+
+// Loop to find the sum of monthly difference from newly created netArray of monthly differences
+AveragePL = netArray.reduce((sum,arr) => sum + arr, 0);
+// for (let index in netArray) {
+//   AveragePL = AveragePL + netArray[index];
+// }
+// Use sum of monthly differences to calculate the average, and convert to 2 decimal places
+AveragePL = (AveragePL / months).toFixed(2);
+
+
 
 // var Ttl = finances.reduce((sum, arr) => sum + arr[1], 0);
 // console.log(Ttl)
