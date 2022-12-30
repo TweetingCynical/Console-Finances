@@ -119,7 +119,7 @@ AveragePL = finances.reduce((sum,arr) => sum + arr[2], 0);
 // Use sum of monthly differences to calculate the average, and convert to 2 decimal places
 AveragePL = (AveragePL / months).toFixed(2);
 
-// Sort the finances array by the largest of index 2
+// Sort the finances array by the largest of index 2 (monthly differences)
 finances = finances.sort(function(a,b) {
   return b[2]-a[2]
 });
