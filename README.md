@@ -50,9 +50,11 @@ Some of the key JavaScript skills being utilised:
 - Reduce to perform sum action on one column of the array;
 - .toFixed(2) to round a calculation to monetary format;
 - Use of sort function to establish the highest (first row) and lowest (last row) values of new index 2;
+
     finances = finances.sort(function(a,b) {
       return b[2]-a[2]
     });
+
 - Use of back ticks for concatenation (string literals);
 - Use of $ to create placeholders in string literals such as ${months};
 - Use of ${finances[finances.length - 1][0]} ($${finances[finances.length - 1][2]}) to reference specific array rows and columns in the finances variable after sorting.
@@ -62,6 +64,7 @@ Some of the key JavaScript skills being utilised:
 ## Suggested future changes
 
 - Add formatting of the monetary values to make reading of larger numbers easier (comma separated thousands):
+
     total = total.toLocaleString('en-US', {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
