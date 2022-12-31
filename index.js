@@ -99,25 +99,28 @@ var months = finances.length;
 
 // Calculate the total of all months, net difference each month, highest difference and lowest difference
 for(let row in finances){
-  for(let col in finances[row]){
-    // Ignore the month column, perform actions only on amount column
-    if(typeof finances[row][col] !== 'string'){
       // Calculate running total from each row to the next
-      total += finances[row][col];
-      // Calculate the difference between the current month and the last
-      diff = finances[row][col] - net;
+      total += finances[row][1];
+      // Check if row is after first row
+      if (row > 0) {
+        // Calculate the difference between the current month and the last
+        diff = finances[row][1] - net;
+      }
+      // For if row is the first row
+      else {
+        // Set diff to zero, since first month does not represent a change in profit
+        diff = 0;
+      }
       // Reset value of net, to the value of the current monthly amount, ready to be used in the next loop.
-      net = finances[row][col];
+      net = finances[row][1];
+      // After each monthly difference has been calculated, append it to each row within the finances table.
+      finances[row].push(diff);
     }
-  }
-  // After each monthly difference has been calculated, append it to each row within the finances table.
-  finances[row].push(diff);
-}
 
 // Reduce to find the sum of monthly difference from newly created index 2 (monthly differences) of finances
 AveragePL = finances.reduce((sum,arr) => sum + arr[2], 0);
-// Use sum of monthly differences to calculate the average, and convert to 2 decimal places
-AveragePL = (AveragePL / months).toFixed(2);
+// Use sum of monthly differences to calculate the average, excluding the first month, divide by number of months -1, and convert to 2 decimal places
+AveragePL = (AveragePL / (months - 1)).toFixed(2);
 
 // Sort the finances array by the largest of index 2 (monthly differences)
 finances = finances.sort(function(a,b) {
