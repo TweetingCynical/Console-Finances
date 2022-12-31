@@ -93,6 +93,7 @@ let total = 0;
 let diff = 0;
 let net = 0
 let AveragePL = 0;
+let diffTotal = 0;
 
 // Count the number of rows in the table
 var months = finances.length;
@@ -115,12 +116,12 @@ for(let row in finances){
       net = finances[row][1];
       // After each monthly difference has been calculated, append it to each row within the finances table.
       finances[row].push(diff);
+      // Keep running total of diff
+      diffTotal += diff;
     }
 
-// Reduce to find the sum of monthly difference from newly created index 2 (monthly differences) of finances
-AveragePL = finances.reduce((sum,arr) => sum + arr[2], 0);
-// Use sum of monthly differences to calculate the average, excluding the first month, divide by number of months -1, and convert to 2 decimal places
-AveragePL = (AveragePL / (months - 1)).toFixed(2);
+// Calculate AveragePL from diffTotal
+AveragePL = (diffTotal / (months - 1)).toFixed(2);
 
 // Sort the finances array by the largest of index 2 (monthly differences)
 finances = finances.sort(function(a,b) {
