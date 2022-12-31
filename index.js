@@ -96,7 +96,7 @@ let AveragePL = 0;
 let diffTotal = 0;
 
 // Count the number of rows in the table
-var months = finances.length;
+let months = finances.length;
 
 // Calculate the total of all months, net difference each month, highest difference and lowest difference
 for(let row in finances){
@@ -136,6 +136,6 @@ Total Months: ${months}
 Total: $${total}
 Average  Change: $${AveragePL}
 Greatest increase in Profits: ${finances[0][0]} ($${finances[0][2]})
-Greatest decrease in Profits: ${finances[finances.length - 1][0]} ($${finances[finances.length - 1][2]})`;
+Greatest decrease in Profits: ${finances[months - 1][0]} ($${finances[months - 1][2]})`;
 
 console.log(output)
