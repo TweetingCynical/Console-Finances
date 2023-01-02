@@ -91,8 +91,7 @@ let finances = [
 // Declare variables
 let total = 0;
 let diff = 0;
-let net = 0
-let AveragePL = 0;
+let net = 0;
 let diffTotal = 0;
 
 // Count the number of rows in the table
@@ -121,21 +120,21 @@ for(let row in finances){
     }
 
 // Calculate AveragePL from diffTotal
-AveragePL = (diffTotal / (months - 1)).toFixed(2);
+let AveragePL = (diffTotal / (months - 1)).toFixed(2);
 
 // Sort the finances array by the largest of index 2 (monthly differences)
-finances = finances.sort(function(a,b) {
+const newFinancesArray = finances.sort(function(a,b) {
   return b[2]-a[2]
 });
 
 // Final console output
-output = `
+const output = `
 Finance Analysis
 ----------------------------
 Total Months: ${months}
 Total: $${total}
 Average  Change: $${AveragePL}
-Greatest increase in Profits: ${finances[0][0]} ($${finances[0][2]})
-Greatest decrease in Profits: ${finances[months - 1][0]} ($${finances[months - 1][2]})`;
+Greatest increase in Profits: ${newFinancesArray[0][0]} ($${newFinancesArray[0][2]})
+Greatest decrease in Profits: ${newFinancesArray[months - 1][0]} ($${newFinancesArray[months - 1][2]})`;
 
 console.log(output)
